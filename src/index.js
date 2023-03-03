@@ -53,11 +53,15 @@ class App extends React.Component{
           data: data.toLocaleString(),
           icone: icone
         })
-
+      },
+      (erro) => {
+        console.log(erro)
+        this.setState({mensagemDeErro: 'Tente novamente mais tarde'})
       }  
     )
   }
   render(){
+    console.log(this.state)
     return (
       // .container.border{teste}
       <div className="container mt-2">
@@ -79,6 +83,8 @@ class App extends React.Component{
                   {
                     this.state.latitude ?
                     `Coordenadas: ${this.state.latitude}, ${this.state.longitude}. Data: ${this.state.data}.`
+                    : this.state.mensagemDeErro ?
+                    `${this.state.mensagemDeErro}`
                     :
                     `Clique no botão para saber a sua estação climática`
                   }
