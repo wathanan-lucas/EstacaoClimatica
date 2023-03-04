@@ -14,7 +14,21 @@ class App extends React.Component{
       data: null,
       icone: null
     }
+    console.log('constructor')
   }
+
+  componentDidMount(){
+    this.obterLocalizacao()
+  }
+
+  componentDidUpdate(){
+    console.log('componentDidUpdate')
+  }
+
+  componentWillUnmount(){
+    console.log('componentWillUnmount')
+  }
+
   obterEstacao = (data, latitude) => {
     const anoAtual = data.getFullYear()
     //23/06
@@ -61,7 +75,7 @@ class App extends React.Component{
     )
   }
   render(){
-    console.log(this.state)
+    console.log('render')
     return (
       // .container.border{teste}
       <div className="container mt-2">
@@ -94,6 +108,12 @@ class App extends React.Component{
                 onClick={this.obterLocalizacao}
                 className="btn btn-outline-primary w-100 mt-2">
                   Qual a minha estação
+              </button>
+              {/* button.btn.btn-outline-danger.w-100.mt-2{Desmontar componente} */}
+              <button 
+                className="btn btn-outline-danger w-100 mt-2"
+                onClick={() => ReactDOM.unmountComponentAtNode(document.querySelector('#root'))}>
+                Desmontar componente
               </button>
             </div>
           </div>
