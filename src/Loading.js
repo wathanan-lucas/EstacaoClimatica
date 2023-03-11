@@ -5,10 +5,17 @@ export class Loading extends Component {
     return (
       <div className='d-flex justify-content-center align-items-center borded rounded p-3'
         style={{width: '3rem', height: "3rem"}}>
-            <span className='visually-hidden'>Carregando</span>
+            <div className='spinner-border text-primary'>
+                <span className='visually-hidden'>Carregando</span>
+            </div>
+            <p className='mt-3 text-primary'>{this.props.mensagem}</p>
       </div>
     )
   }
+}
+
+Loading.defaultProps = {
+    mensagem: 'Carregando'
 }
 
 export default Loading

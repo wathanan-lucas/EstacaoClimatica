@@ -100,7 +100,9 @@ class App extends React.Component{
           {
             (!this.state.mensagemDeErro && !this.state.latitude) ?
     
-            <Loading />
+            <Loading 
+              mensagem= "Por favor, habilite a localização."
+            />
             :
 
             this.state.mensagemErro ?
