@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react'
 // imrd
 import ReactDOM from 'react-dom'
+import EstacaoClimatica from './EstacaoClimatica'
+import Loading from './Loading'
 
 class App extends React.Component{
   state = {
@@ -77,6 +79,7 @@ class App extends React.Component{
           data: data.toLocaleString(),
           icone: icone
         })
+
       },
       (erro) => {
         console.log(erro)
@@ -93,40 +96,32 @@ class App extends React.Component{
         <div className="row justify-content-center">
          <div className="col-12 col-md-8">
           {/* .card>.card-body */}
-          <div className="card">
-            <div className="card-body">
-              
-              <div 
-                className="d-flex align-items-center border rounded mb-2"
-                style={{height: '6rem'}}>
-                <i className={`fas fa-5x ${this.state.icone}`}></i>
-                <p className="w-75 ms-3 text-center fs-1">{this.state.estacao}</p>
-              </div>
-              <div>
-                <p className="text-center">
-                  {
-                    this.state.latitude ?
-                    `Coordenadas: ${this.state.latitude}, ${this.state.longitude}. Data: ${this.state.data}.`
-                    : this.state.mensagemDeErro ?
-                    `${this.state.mensagemDeErro}`
-                    :
-                    `Clique no botão para saber a sua estação climática`
-                  }
-                </p>
-              </div>
-              <button 
-                onClick={this.obterLocalizacao}
-                className="btn btn-outline-primary w-100 mt-2">
-                  Qual a minha estação
-              </button>
-              {/* button.btn.btn-outline-danger.w-100.mt-2{Desmontar componente} */}
-              <button 
-                className="btn btn-outline-danger w-100 mt-2"
-                onClick={() => ReactDOM.unmountComponentAtNode(document.querySelector('#root'))}>
-                Desmontar componente
-              </button>
-            </div>
-          </div>
+
+          {
+            (!this.state.mensagemDeErro && !this.state.latitude) ?
+    
+            <Loading />
+            :
+
+            this.state.mensagemErro ?
+
+            <p className="border rounded p-2 fs-1 texte-center">
+              É preciso dar acesso à localização. 
+            </p>
+            :
+
+            <EstacaoClimatica 
+              icone = {this.state}
+              estacao = {this.state.estado}
+              latitude = {this.state.latitude}
+              longitude = {this.state.longitude}
+              data = {this.state.data}
+              mensagemDeErro = {this.state.mensagemErro}
+              obterLocalizacao = {this.obterLocalizacao}
+            />
+          }
+         
+
          </div>         
         </div>
       </div>
